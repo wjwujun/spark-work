@@ -11,6 +11,5 @@ object TestSplit {
 
     println(teacher + ", " + subject)
 
-
   }
 }
