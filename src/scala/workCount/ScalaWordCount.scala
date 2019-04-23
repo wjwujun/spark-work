@@ -5,8 +5,15 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object ScalaWordCount {
   def main(args: Array[String]): Unit = {
+
     //创建spark配置，设置应用程序名字
-    //val conf = new SparkConf().setAppName("ScalaWordCount")
+    /*
+    * 本地运行模式 (单机),为Local[N]模式，是用单机的多个线程来模拟Spark分布式计算，直接运行在本地，便于调试，通常用来验证开发出来的应用程序逻辑上有没有问题。
+    *　其中N代表可以使用N个线程，每个线程拥有一个core。如果不指定N，则默认是1个线程
+    * local: 只启动一个executor
+    * local[N]: 启动N个executor
+    * local[*]: 启动跟cpu数目相同的的executor
+    *  */
     val conf = new SparkConf().setAppName("ScalaWordCount").setMaster("local[*]")
     //创建spark执行的入口
     val sc = new SparkContext(conf)
