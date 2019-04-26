@@ -25,13 +25,6 @@ object GroupFavTeacher1 {
       ((subject, teacher), 1)
     })
 
-    lines.map(line => {
-      val index = line.lastIndexOf("/")
-      val teacher = line.substring(index + 1)
-      val httpHost = line.substring(0, index)
-      ((httpHost, teacher), 1)
-    })
-
     //和一组合在一起(不好，调用了两次map方法)
     //val map: RDD[((String, String), Int)] = sbjectAndteacher.map((_, 1))
 
@@ -60,7 +53,7 @@ object GroupFavTeacher1 {
     *  经过分组后，一个分区内可能有多个学科的数据，一个学科就是一个迭代器
     * 将每一个组拿出来进行操作
     * 为什么可以调用sacla的sortby方法，因为一个学科的数据已经在一台机器上的一个scala集合里面了
-    *
+    *(take是一个action，会触发任务提交)
     * */
     val sorted = grouped.mapValues(_.toList.sortBy(_._2).reverse.take(10))
 
